@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Flight Booking </title>
+
+    {% load static %}
+    <link rel = "stylesheet" href="{% static 'style.css' %}">
+</head>
+<body>
+<h2> Flight Booking</h2>
+<form method = "GET">
+    <input type = "text"
+        name="search"
+        placeholder="source destination">
+<button>Save</button>
+</form>
+
+<br>
+
+<a href = "{% url 'add_flight' %}">Add Flight</a>
+
+<br><br>
+<table border = "1">
+    <tr>
+        <th>Flight No</th>
+        <th>Source</th>
+        <th>Destination</th>
+        <th>Price</th>
+    </tr>
+
+{% for flight in flights %}
+<tr>
+    <td>{{ flight.flight_no }}</td>
+    <td>{{ flight.source }}</td>
+    <td>{{ flight.destination }}</td>
+    <td>{{ flight.price }}</td>
+    <td>{{ flight.seats }}</td>
+    <td>
+        <a href ="{% url 'update_flight' flight.id %}">Update Flight</a>
+        <a href ="{% url 'delete_flight' flight.id %}">Delete Flight</a>
+        <a href ="{% url 'book_flight' %}">Book Flight</a>
+    </td>
+
+</tr>
+
+{% endfor %}
+</table>
+
+</body>
+</html>
